@@ -1,0 +1,66 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Отпуска сотрудников — MVP</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Календарь отпусков</h1>
+      <p class="subtitle">Локально, без хранения данных. Загрузите CSV и сохраните календарь как картинку.</p>
+    </header>
+
+    <section class="controls">
+      <div class="card">
+        <h2>1. Входная таблица</h2>
+        <p>Формат CSV: <code>employee,start_date,end_date</code>. Даты в формате <code>YYYY-MM-DD</code>. Цвета назначаются автоматически.</p>
+        <div class="row">
+          <input type="file" id="fileInput" accept=".csv,text/csv" />
+          <button id="loadSample">Загрузить пример</button>
+        </div>
+        <textarea id="csvInput" rows="8" spellcheck="false" placeholder="employee,start_date,end_date\nИван,2026-02-10,2026-02-20\nАнна,2026-02-15,2026-02-28"></textarea>
+        <div class="row">
+          <button id="renderBtn" class="primary">Построить календарь</button>
+          <span id="status"></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>2. Настройки вида</h2>
+        <div class="row">
+          <label>Старт месяца
+            <input type="month" id="startMonth" />
+          </label>
+        </div>
+        <div class="row">
+          <label>Размер ячейки (px)
+            <input type="number" id="cellSize" min="18" max="64" value="28" />
+          </label>
+          <label>Показывать легенду
+            <input type="checkbox" id="showLegend" checked />
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>3. Экспорт</h2>
+        <p>Сохраните календарь в PNG.</p>
+        <button id="exportBtn">Сохранить PNG</button>
+      </div>
+    </section>
+
+    <section class="output">
+      <canvas id="calendarCanvas" width="1200" height="600"></canvas>
+    </section>
+
+    <footer>
+      <p>Никаких данных не сохраняется: все обработки происходят в браузере.</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
